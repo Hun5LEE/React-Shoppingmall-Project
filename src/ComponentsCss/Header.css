@@ -1,4 +1,49 @@
 .header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  height: 5.5rem;
+  background-color: antiquewhite;
+  position: sticky;
+  top: 0;
+}
+
+.header_left_menu {
+  margin: 0 2rem;
+}
+
+.header_center {
+  display: flex;
+  align-items: center;
+  width: 60%;
+}
+
+.header_logo img {
+  height: 2rem;
+}
+
+.header_search {
+  display: flex;
+  width: 70%;
+  margin-left: 1rem;
+}
+
+.header_search input {
+  height: 1.5rem;
+  width: 100%;
+  border-radius: 3px;
+  border: none;
+}
+
+.header_rank_product {
+  margin-left: 1rem;
+  width: 30%;
+}
+
+.header_right_user {
+  margin-right: 2rem;
+}
+
+.header_right_account {
+  margin-right: 2rem;
 }
