@@ -11,6 +11,16 @@ function App(): JSX.Element {
         src={process.env.PUBLIC_URL + "./Img/main_bg.jpg"}
         alt=""
       />
+      <img
+        className="main_bg"
+        src={process.env.PUBLIC_URL + "./Img/main_bg.jpg"}
+        alt=""
+      />
+      <img
+        className="main_bg"
+        src={process.env.PUBLIC_URL + "./Img/main_bg.jpg"}
+        alt=""
+      />
     </div>
   );
 }
