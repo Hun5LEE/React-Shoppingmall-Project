@@ -1,0 +1,19 @@
+.product_list_wrapper {
+  margin-top: 5rem;
+  height: 3000px;
+}
+
+.product_list {
+  position: sticky;
+  top: 5rem;
+  margin-top: 3rem;
+  opacity: 1;
+  transform: all 0.3s;
+}
+
+.product_list img {
+  display: block;
+  margin: auto;
+  width: 600px;
+  max-width: 80%;
+}

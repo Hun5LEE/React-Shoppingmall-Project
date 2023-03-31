@@ -1,49 +1,50 @@
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 5.5rem;
-  background-color: antiquewhite;
-  position: sticky;
+/* First Row */
+.header_firstRow {
+  position: fixed;
+  width: 100%;
   top: 0;
-}
-
-.header_left_menu {
-  margin: 0 2rem;
-}
-
-.header_center {
+  background-color: white;
+  z-index: 5;
   display: flex;
   align-items: center;
-  width: 60%;
+  justify-content: space-between;
+  height: 3rem;
 }
 
 .header_logo img {
-  height: 2rem;
+  height: 2.5rem;
+  margin-left: 1rem;
+  cursor: pointer;
 }
 
-.header_search {
+.header_account_wrapper {
+  font-size: 12px;
+  font-weight: 300;
   display: flex;
-  width: 70%;
-  margin-left: 1rem;
 }
 
-.header_search input {
-  height: 1.5rem;
-  width: 100%;
-  border-radius: 3px;
-  border: none;
+.header_account_wrapper > div {
+  margin-right: 1rem;
+  cursor: pointer;
 }
 
-.header_rank_product {
-  margin-left: 1rem;
-  width: 30%;
+/* second Row */
+
+.header_secondRow {
+  margin-top: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f7;
+  height: 4rem;
 }
 
-.header_right_user {
-  margin-right: 2rem;
-}
-
-.header_right_account {
-  margin-right: 2rem;
+/* Third Row */
+.header_thirdRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4rem;
+  font-size: 13px;
+  cursor: pointer;
 }

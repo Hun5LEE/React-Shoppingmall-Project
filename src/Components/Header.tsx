@@ -1,29 +1,49 @@
 import React from "react";
 import "../ComponentsCss/Header.css";
-import SearchIcon from "@mui/icons-material/Search";
-import ListIcon from "@mui/icons-material/List";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-function Header() {
+
+import {
+  faArrowRightToBracket,
+  faMagnifyingGlass,
+  faBagShopping,
+  faUser,
+  faEye,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+function Header(): JSX.Element {
   return (
     <div className="header">
-      <ListIcon className="header_left_menu" sx={{ fontSize: 40 }} />
-      <div className="header_center">
+      <div className="header_firstRow">
         <div className="header_logo">
-          <img src={process.env.PUBLIC_URL + "./Img/logo2.png"} alt="" />
+          <img src={process.env.PUBLIC_URL + "./Img/stussy.jpg"} alt="" />
         </div>
-        <div className="header_search">
-          <input type="text" />
-          <SearchIcon />
+        <div className="header_account_wrapper">
+          <div>
+            <FontAwesomeIcon icon={faUser} size="xl" />
+            <span> My Page </span>
+          </div>
+          <div>
+            <FontAwesomeIcon icon={faBagShopping} size="xl" />
+            <span> Shopping Bag </span>
+          </div>
+          <div>
+            <FontAwesomeIcon icon={faArrowRightToBracket} size="xl" />
+            <span> Login </span>
+          </div>
         </div>
-        <div className="header_rank_product">1 - 애플워치 7</div>
       </div>
-      <div className="header_right_user">
-        <AccountCircleIcon
-          className="header_right_account"
-          sx={{ fontSize: 32 }}
-        />
-        <ShoppingCartIcon sx={{ fontSize: 32 }} />
+      <div className="header_secondRow">
+        신용카드 결제 시 최대 12개월 할부 적용 가능
+      </div>
+      <div className="header_thirdRow">
+        <div style={{ marginLeft: "1rem" }}>
+          <span>Watched</span>
+          <FontAwesomeIcon icon={faEye} style={{ marginLeft: "0.3rem" }} />
+        </div>
+        <div style={{ marginRight: "1rem" }}>
+          <input type="text" />
+          <FontAwesomeIcon icon={faMagnifyingGlass} />
+        </div>
       </div>
     </div>
   );
