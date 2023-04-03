@@ -1,6 +1,5 @@
 import React from "react";
 import "../ComponentsCss/Header.css";
-
 import {
   faArrowRightToBracket,
   faMagnifyingGlass,
@@ -9,13 +8,20 @@ import {
   faEye,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from "react-router-dom";
 
 function Header(): JSX.Element {
+  const navigate = useNavigate();
+
   return (
     <div className="header">
       <div className="header_firstRow">
         <div className="header_logo">
-          <img src={process.env.PUBLIC_URL + "./Img/stussy.jpg"} alt="" />
+          <img
+            onClick={() => navigate("/")}
+            src={process.env.PUBLIC_URL + "./Img/stussy.jpg"}
+            alt=""
+          />
         </div>
         <div className="header_account_wrapper">
           <div>
