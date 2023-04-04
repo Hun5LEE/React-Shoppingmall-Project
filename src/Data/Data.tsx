@@ -3,6 +3,7 @@ interface Item {
   title: string;
   content: string;
   price: number;
+  img: string;
 }
 
 const data: Item[] = [
@@ -11,6 +12,7 @@ const data: Item[] = [
     title: "White and Black",
     content: "Born in France",
     price: 120000,
+    img: "/Img/shoes/shoes1.jpg",
   },
 
   {
@@ -18,6 +20,7 @@ const data: Item[] = [
     title: "Red Knit",
     content: "Born in Seoul",
     price: 110000,
+    img: "/Img/shoes/shoes2.jpg",
   },
 
   {
@@ -25,6 +28,7 @@ const data: Item[] = [
     title: "Grey Yordan",
     content: "Born in the States",
     price: 130000,
+    img: "/Img/shoes/shoes3.jpg",
   },
 ];
 

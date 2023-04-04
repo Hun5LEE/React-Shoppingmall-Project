@@ -1,20 +1,23 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate, NavigateFunction } from "react-router-dom";
 import "./App.css";
 import Header from "./Components/Header";
 import ProductList from "./Components/ProductList";
 import FirstProducts from "./Pages/FirstProducts";
 import Details from "./Pages/Details";
+import data from "./Data/Data";
 
 function App(): JSX.Element {
+  const navigate: NavigateFunction = useNavigate();
+  const productsData: Data[] = data;
   return (
     <div className="App">
+      <Header navigate={navigate} />
       <Routes>
         <Route
           path="/"
           element={
             <>
-              <Header />
               <img
                 className="main_bg"
                 src={process.env.PUBLIC_URL + "./Img/bg.png"}
@@ -28,28 +31,38 @@ function App(): JSX.Element {
           path="/products1"
           element={
             <>
-              <Header />
               <img
                 className="main_bg"
                 src={process.env.PUBLIC_URL + "./Img/bg.png"}
                 alt=""
               />
-              <FirstProducts />
+              <FirstProducts navigate={navigate} productsData={productsData} />
             </>
           }
-        />
+        ></Route>
         <Route
-          path="/products1/details"
+          path="/products1/details/:id"
           element={
             <>
-              <Header />
-              <Details />
+              <Details productsData={productsData} />
             </>
           }
         />
+        <Route path="*" element={<h1>404 Pages</h1>} />
       </Routes>
     </div>
   );
 }
 
 export default App;
+
+export interface Data {
+  id: number;
+  title: string;
+  content: string;
+  price: number;
+  img: string;
+}
+
+// 비슷한 페이지 만들시 nested routes 사용.
+// 페이지 여러개 만들때 URL파라미터 유용.

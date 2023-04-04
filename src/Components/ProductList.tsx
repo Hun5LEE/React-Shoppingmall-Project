@@ -1,6 +1,6 @@
 import React from "react";
 import "../ComponentsCss/ProductList.css";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 function ProductList(): JSX.Element {

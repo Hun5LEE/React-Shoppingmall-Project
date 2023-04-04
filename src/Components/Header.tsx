@@ -8,11 +8,13 @@ import {
   faEye,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction } from "react-router-dom";
 
-function Header(): JSX.Element {
-  const navigate = useNavigate();
+interface HeaderProps {
+  navigate: NavigateFunction;
+}
 
+function Header({ navigate }: HeaderProps): JSX.Element {
   return (
     <div className="header">
       <div className="header_firstRow">
