@@ -21,7 +21,7 @@ function Header({ navigate }: HeaderProps): JSX.Element {
         <div className="header_logo">
           <img
             onClick={() => navigate("/")}
-            src={process.env.PUBLIC_URL + "./Img/stussy.jpg"}
+            src={process.env.PUBLIC_URL + "/Img/stussy.jpg"}
             alt=""
           />
         </div>

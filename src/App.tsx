@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route, useNavigate, NavigateFunction } from "react-router-dom";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./Components/Header";
 import ProductList from "./Components/ProductList";
@@ -10,6 +11,19 @@ import data from "./Data/Data";
 function App(): JSX.Element {
   const navigate: NavigateFunction = useNavigate();
   const productsData: Data[] = data;
+  const [products, setProducts] = useState<Data[]>([]);
+  //
+  useEffect(() => {
+    return () => {
+      fetch("/Products/ShoeProducts.json")
+        .then((data) => data.json())
+        .then((result) => {
+          let copy: any = [...products, result];
+          setProducts(copy);
+        });
+    };
+  }, []);
+
   return (
     <div className="App">
       <Header navigate={navigate} />
@@ -44,7 +58,7 @@ function App(): JSX.Element {
           path="/products1/details/:id"
           element={
             <>
-              <Details productsData={productsData} />
+              <Details productsData={productsData} products={products} />
             </>
           }
         />

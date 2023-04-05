@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  opacity: 0;
+  transition: all 1s;
 }
 
 .container img {
@@ -28,4 +30,14 @@
   color: white;
   background-color: #e13c52;
   cursor: pointer;
+  margin-bottom: 1rem;
+  visibility: visible;
+}
+
+.visible {
+  opacity: 1;
+}
+
+.product_detail input {
+  text-align: center;
 }
