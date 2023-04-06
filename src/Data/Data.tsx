@@ -6,7 +6,7 @@ interface Item {
   img: string;
 }
 
-const data: Item[] = [
+export const data: Item[] = [
   {
     id: 0,
     title: "White and Black",

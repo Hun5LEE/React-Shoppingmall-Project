@@ -1,0 +1,37 @@
+.detailsTab {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  top: 3rem;
+  height: 4rem;
+  font-weight: 500;
+  background-color: white;
+  border-bottom: 1px solid #eeeeee;
+  border-top: 1px solid #eeeeee;
+}
+
+.detailsTab_productInfo,
+.detailsTab_QA,
+.detailsTab_review {
+  display: flex;
+  padding: 0 10rem;
+  flex-shrink: 0;
+  transition: all 0.5s;
+  align-items: center;
+  height: 100%;
+  cursor: pointer;
+}
+
+.clickShow {
+  background-color: #e13c52;
+  color: white;
+}
+
+@media screen and (max-width: 1090px) {
+  .detailsTab_productInfo,
+  .detailsTab_QA,
+  .detailsTab_review {
+    padding: 0 12%;
+  }
+}

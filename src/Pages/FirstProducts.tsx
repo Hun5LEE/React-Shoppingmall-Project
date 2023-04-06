@@ -23,12 +23,11 @@ function FirstProducts({
     fetch("/Products/ShoeProducts.json")
       .then((data) => data.json())
       .then((result) => {
-        let copyProducts = [...shoes];
+        const copyProducts = [...shoes];
         if (btnCount === 1) {
           setShoes(copyProducts.concat(result.slice(0, 3)));
         } else if (btnCount === 2) {
           setShoes(copyProducts.concat(result.slice(3, result.length)));
-          console.log(shoes);
           setHidden("hidden");
         }
       })
@@ -41,7 +40,7 @@ function FirstProducts({
       <button
         className="product_btn"
         onClick={() => {
-          let copyShoes = [...shoes];
+          const copyShoes = [...shoes];
           copyShoes.sort((a, b) => {
             return a.price - b.price;
           });
