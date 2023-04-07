@@ -1,0 +1,36 @@
+.cart_wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.cart_table {
+  margin-top: 2rem;
+  margin-left: 1rem;
+  border-top: 1px solid #bbbbbb;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td {
+  border-top: 1px solid #eeeeee;
+  border-right: 1px solid #eeeeee;
+}
+
+.cart_table_productsInfo_wrapper {
+  display: flex;
+  padding: 1rem;
+}
+
+.cart_table_productsInfo_img {
+  width: 35%;
+}
+
+.cart_table_productsInfo div {
+  padding-bottom: 0.5rem;
+}
+
+@media screen and (min-width: 1200px) {
+  .cart_wrapper {
+    flex-direction: row;
+  }
+}

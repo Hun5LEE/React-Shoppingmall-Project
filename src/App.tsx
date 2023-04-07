@@ -5,6 +5,7 @@ import Header from "./Components/Header";
 import ProductList from "./Components/ProductList";
 import FirstProducts from "./Pages/FirstProducts";
 import Details from "./Pages/Details";
+import Cart from "./Pages/Cart";
 import data from "./Data/Data";
 
 function App(): JSX.Element {
@@ -46,6 +47,14 @@ function App(): JSX.Element {
           element={
             <>
               <Details productsData={productsData} />
+            </>
+          }
+        />
+        <Route
+          path="/cart"
+          element={
+            <>
+              <Cart />
             </>
           }
         />

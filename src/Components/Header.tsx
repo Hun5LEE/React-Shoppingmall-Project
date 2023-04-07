@@ -30,7 +30,7 @@ function Header({ navigate }: HeaderProps): JSX.Element {
             <FontAwesomeIcon icon={faUser} size="xl" />
             <span> My Page </span>
           </div>
-          <div>
+          <div onClick={() => navigate("/cart")}>
             <FontAwesomeIcon icon={faBagShopping} size="xl" />
             <span> Shopping Bag </span>
           </div>
