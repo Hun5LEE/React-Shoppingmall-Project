@@ -43,7 +43,7 @@ function Details({ productsData }: DetailsProps): JSX.Element {
         </div>
         <div className="product_detail">
           <DetailsProductsInfo productsData={productsData} id={id} />
-          <button>주문하기</button>
+
           <input
             value={text}
             placeholder="숫자를 입력하세요."

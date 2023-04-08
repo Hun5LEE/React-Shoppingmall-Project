@@ -1,45 +1,68 @@
 import React from "react";
 import "../ComponentsCss/Cart.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../Store/store";
+import { addCount } from "../Store/store";
 
 function Cart() {
   const state = useSelector((state: RootState) => state.cart);
-  console.log(state);
-
+  const dispatch = useDispatch();
+  //
   return (
     <div className="cart_wrapper">
       <div>
         <table className="cart_table">
           <thead>
             <tr>
-              <th style={{ width: "150px" }}>전체선택</th>
-              <th style={{ width: "750px" }}>상품정보</th>
-              <th style={{ width: "200px" }}>가격</th>
-              <th style={{ width: "100px" }}>배송비</th>
+              <th style={{ width: "150px" }}>
+                <span>전체선택</span>
+              </th>
+              <th style={{ width: "750px" }}>
+                <span>상품정보</span>
+              </th>
+              <th style={{ width: "200px" }}>
+                <span>가격</span>
+              </th>
+              <th style={{ width: "100px" }}>
+                <span>배송비</span>
+              </th>
             </tr>
           </thead>
           <tbody>
             {state.map((item, i) => {
               return (
                 <tr key={i}>
-                  <td>전체선택</td>
+                  <td style={{ textAlign: "center" }}>전체선택</td>
                   <td className="cart_table_productsInfo_wrapper">
-                    <div className="cart_table_productsInfo_img">이미지</div>
+                    <div className="cart_table_productsInfo_img">
+                      <img src={state[i].img} alt="" />
+                    </div>
                     <div className="cart_table_productsInfo">
-                      <div>{state[i].name}</div>
-                      <div>
-                        매진임박 (수량)개
-                        <br />
-                        4/11(화) 도착예정
+                      <div className="cart_table_productsInfo_name">
+                        {state[i].title}
                       </div>
-                      <div>
-                        <button>-</button>수량<button>+</button>
+                      <div className="cart_table_productsInfo_remain">
+                        <p>매진임박 ({state[i].stocks})개</p>
+                        <p>4/11(화) 도착예정</p>
+                      </div>
+                      <div className="cart_table_productsInfo_count">
+                        <button>-</button>
+                        <span
+                          style={{ margin: "0 0.7rem", fontSize: "0.9rem" }}
+                        >
+                          {" "}
+                          {state[i].count}{" "}
+                        </span>
+                        <button onClick={() => dispatch(addCount(state[i].id))}>
+                          +
+                        </button>
                       </div>
                     </div>
                   </td>
-                  <td>{state[i].count} 가격</td>
-                  <td style={{ borderRight: "none" }}>배송비</td>
+                  <td style={{ textAlign: "center" }}> 129,000 ₩</td>
+                  <td style={{ borderRight: "none", textAlign: "center" }}>
+                    무료
+                  </td>
                 </tr>
               );
             })}

@@ -6,25 +6,35 @@ export interface RootState {
 
 interface Cart {
   id: number;
-  name: string;
+  title: string;
+  content: string;
+  price: number;
+  img: string;
   count: number;
+  stocks: number;
 }
 
 const cart = createSlice({
   // state이름
   name: "cart",
-  initialState: [
-    { id: 0, name: "White and Black", count: 1 },
-    { id: 2, name: "Grey Yordan", count: 1 },
-  ] as Cart[],
+  initialState: [] as Cart[],
   reducers: {
-    // changeCount(state) {
-    //   return state[1].count + 1;
-    // },
+    // Cart에서 addCount 파라미터로 state[i].id를 전달한다
+    // -> findIndex를 사용하여 state의 id와 전달받은 id가 일치하는것을 리턴 -> 리턴받은 인덱스로 count + 1해줌
+    addCount(state, action) {
+      const index = state.findIndex((item) => {
+        return item.id === action.payload;
+      });
+      state[index].count++;
+    },
+    addProduct(state, action) {
+      // DetailsProductsInfo에서 넘겨받은 해당 obj를 state에 push 해줌.
+      state.push(action.payload);
+    },
   },
 });
 
-// export const { changeCount } = cart.actions;
+export const { addCount, addProduct } = cart.actions;
 
 export default configureStore({
   reducer: {
@@ -36,3 +46,5 @@ export default configureStore({
 // 2. 만든함수 export 해주기. ->
 // ex) export const { 함수1, 함수2, ... } = cart.actions <- (state변경함수들이 남음)
 // 3. import해서사용
+
+// Tip : array / objectd의 경우 state.name = "~~~" 이렇게 직접수정해도 state복사본을 리턴해줌. immer.js때문에

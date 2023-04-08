@@ -72,6 +72,8 @@ export interface Data {
   content: string;
   price: number;
   img: string;
+  count: number;
+  stocks: number;
 }
 
 // 비슷한 페이지 만들시 nested routes 사용.

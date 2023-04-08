@@ -16,6 +16,7 @@ td {
   border-right: 1px solid #eeeeee;
 }
 
+/* Info */
 .cart_table_productsInfo_wrapper {
   display: flex;
   padding: 1rem;
@@ -23,11 +24,41 @@ td {
 
 .cart_table_productsInfo_img {
   width: 35%;
+  padding-right: 2rem;
 }
 
-.cart_table_productsInfo div {
-  padding-bottom: 0.5rem;
+.cart_table_productsInfo_img img {
+  width: 100%;
 }
+
+.cart_table_productsInfo_name {
+  margin-bottom: 2rem;
+  font-size: 1.25rem;
+}
+
+.cart_table_productsInfo_remain p {
+  font-size: 0.8rem;
+  margin-bottom: 0.3rem;
+}
+
+.cart_table_productsInfo_count {
+  padding: 0.2rem 0 0 0;
+  font-size: 0.8rem;
+}
+
+.cart_table_productsInfo_count button {
+  border: none;
+  font-size: 1rem;
+  font-weight: 400;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50px;
+  background-color: #eeeeee;
+  color: black;
+  cursor: pointer;
+}
+
+/*  */
 
 @media screen and (min-width: 1200px) {
   .cart_wrapper {

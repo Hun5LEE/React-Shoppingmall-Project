@@ -23,6 +23,18 @@
   cursor: pointer;
 }
 
+.product_detail button {
+  width: 100px;
+  height: 32px;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  background-color: #e13c52;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  visibility: visible;
+}
+
 .clickShow {
   background-color: #e13c52;
   color: white;
