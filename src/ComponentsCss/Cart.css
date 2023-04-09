@@ -16,6 +16,22 @@ td {
   border-right: 1px solid #eeeeee;
 }
 
+.cart_table_checked {
+  padding: 0.5rem;
+  border: 1px solid #dddddd;
+  color: #eeeeee;
+  border-radius: 50%;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.showClickColor {
+  background-color: #e13c52;
+
+  color: white;
+  border: none;
+}
+
 /* Info */
 .cart_table_productsInfo_wrapper {
   display: flex;
@@ -29,6 +45,12 @@ td {
 
 .cart_table_productsInfo_img img {
   width: 100%;
+}
+
+.cart_table_productsInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .cart_table_productsInfo_name {

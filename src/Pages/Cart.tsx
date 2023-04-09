@@ -1,19 +1,25 @@
 import React from "react";
 import "../ComponentsCss/Cart.css";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../Store/store";
-import { addCount } from "../Store/store";
-
+import { addCount, minusCount } from "../Store/store";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function Cart() {
+  const [clickColor, setClickColor] = useState("");
+  const [productNum, setProductNum] = useState(0);
+  //
   const state = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
   //
+
   return (
     <div className="cart_wrapper">
       <div>
         <table className="cart_table">
           <thead>
-            <tr>
+            <tr style={{ fontSize: "0.9rem" }}>
               <th style={{ width: "150px" }}>
                 <span>전체선택</span>
               </th>
@@ -29,10 +35,25 @@ function Cart() {
             </tr>
           </thead>
           <tbody>
+            {/* 클릭 -> 스테이트 변경 -> 해당아이템이 맞는지 검사 -> 맞으면 clickColor붙이지 */}
             {state.map((item, i) => {
               return (
                 <tr key={i}>
-                  <td style={{ textAlign: "center" }}>전체선택</td>
+                  <td style={{ textAlign: "center" }}>
+                    <div>
+                      <FontAwesomeIcon
+                        icon={faCheck}
+                        className={`cart_table_checked ${
+                          productNum === i ? clickColor : ""
+                        }`}
+                        onClick={() => {
+                          setProductNum(i);
+                          setClickColor("showClickColor");
+                          console.log(i);
+                        }}
+                      />
+                    </div>
+                  </td>
                   <td className="cart_table_productsInfo_wrapper">
                     <div className="cart_table_productsInfo_img">
                       <img src={state[i].img} alt="" />
@@ -46,7 +67,13 @@ function Cart() {
                         <p>4/11(화) 도착예정</p>
                       </div>
                       <div className="cart_table_productsInfo_count">
-                        <button>-</button>
+                        <button
+                          onClick={() => {
+                            dispatch(minusCount(state[i].id));
+                          }}
+                        >
+                          -
+                        </button>
                         <span
                           style={{ margin: "0 0.7rem", fontSize: "0.9rem" }}
                         >
@@ -59,7 +86,7 @@ function Cart() {
                       </div>
                     </div>
                   </td>
-                  <td style={{ textAlign: "center" }}> 129,000 ₩</td>
+                  <td style={{ textAlign: "center" }}> {state[i].price} ₩</td>
                   <td style={{ borderRight: "none", textAlign: "center" }}>
                     무료
                   </td>

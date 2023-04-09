@@ -1,4 +1,5 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
+import { addAbortSignal } from "stream";
 
 export interface RootState {
   cart: Cart[];
@@ -22,19 +23,44 @@ const cart = createSlice({
     // Cart에서 addCount 파라미터로 state[i].id를 전달한다
     // -> findIndex를 사용하여 state의 id와 전달받은 id가 일치하는것을 리턴 -> 리턴받은 인덱스로 count + 1해줌
     addCount(state, action) {
-      const index = state.findIndex((item) => {
+      const addIndex = state.findIndex((item) => {
         return item.id === action.payload;
       });
-      state[index].count++;
+      // 재고 이상으로 설정 못하게함.
+      if (state[addIndex].count < state[addIndex].stocks) {
+        state[addIndex].count++;
+      }
+    },
+    minusCount(state, action) {
+      const minusIndex = state.findIndex((item) => {
+        return item.id === action.payload;
+      });
+      // 수량을 1개 이하로는 설정 못하게함.
+      if (state[minusIndex].count > 1) {
+        state[minusIndex].count--;
+      }
     },
     addProduct(state, action) {
-      // DetailsProductsInfo에서 넘겨받은 해당 obj를 state에 push 해줌.
-      state.push(action.payload);
+      // 주문하기 눌렀을때 만약 배열에 해당 상품이 있다 -> 그러면 count만 + 1 없으면 push
+      // 해당하는 상품의 인덱스를 담는다 없으면 -1
+      const existingProductIndex = state.findIndex((item) => {
+        return item.id === action.payload.id;
+      });
+
+      if (existingProductIndex === -1) {
+        state.push(action.payload);
+      } else {
+        // 주문하기 버튼 누를시 count + 1 이지만  stocks보다 초과못하게함.
+        state[existingProductIndex].count <
+          state[existingProductIndex].stocks &&
+          state[existingProductIndex].count++;
+        // DetailsProductsInfo에서 넘겨받은 해당 obj를 state에 push 해줌.
+      }
     },
   },
 });
 
-export const { addCount, addProduct } = cart.actions;
+export const { addCount, minusCount, addProduct } = cart.actions;
 
 export default configureStore({
   reducer: {
