@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Routes, Route, useNavigate, NavigateFunction } from "react-router-dom";
 import "./App.css";
 import Header from "./Components/Header";
@@ -11,7 +11,14 @@ import data from "./Data/Data";
 function App(): JSX.Element {
   const navigate: NavigateFunction = useNavigate();
   const productsData: Data[] = data;
-  //
+  // 페이지 처음 로드시 localStorage key value 생성
+  useEffect(() => {
+    // 이미 있으면 초기화 (X)
+    if (localStorage.getItem("cartItems") === null) {
+      localStorage.setItem("cartItems", JSON.stringify([]));
+    }
+  }, []);
+
   return (
     <div className="App">
       <Header navigate={navigate} />

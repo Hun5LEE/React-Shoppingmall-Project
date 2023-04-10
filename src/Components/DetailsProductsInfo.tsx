@@ -1,9 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Data } from "../App";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { RootState } from "../Store/store";
-import { addProduct } from "../Store/store";
+import { addProduct, checkedList } from "../Store/store";
 
 // 더보기 상품들 디테일 페이지로 들어갔을때 새로고침하면 상품정보 부분을
 // 비동기적으로 처리했기 때문에 값을 읽어올수 없음 -> 따로 컴포넌트로 빼서 HTML이 읽힐때 읽어오게함.
@@ -40,7 +40,27 @@ function DetailsProductsInfo({
         <p>{productsList[Number(id)].content}</p>
         <p>{productsList[Number(id)].price} ₩</p>
         {/* addProduct 파라미터로 productsList의 해당 obj를 넘겨줌 */}
-        <button onClick={() => dispatch(addProduct(productsList[Number(id)]))}>
+        <button
+          onClick={() => {
+            dispatch(addProduct(productsList[Number(id)]));
+            dispatch(checkedList(Number(id)));
+
+            const cartItems = localStorage.getItem("cartItems") as string;
+            const parsedCartItems = JSON.parse(cartItems);
+            // 중복 추가 못하게함.
+            if (
+              parsedCartItems.find((item: Data) => {
+                return item.id == Number(id);
+              }) === undefined
+            ) {
+              parsedCartItems.push(productsList[Number(id)]);
+              localStorage.setItem(
+                "cartItems",
+                JSON.stringify(parsedCartItems)
+              );
+            }
+          }}
+        >
           주문하기
         </button>
       </>

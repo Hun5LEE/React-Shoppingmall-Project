@@ -1,8 +1,8 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
-import { addAbortSignal } from "stream";
 
 export interface RootState {
   cart: Cart[];
+  cartCheckedList: CartCheckedList[];
 }
 
 interface Cart {
@@ -15,6 +15,7 @@ interface Cart {
   stocks: number;
 }
 
+// 장바구니 관리
 const cart = createSlice({
   // state이름
   name: "cart",
@@ -46,7 +47,6 @@ const cart = createSlice({
       const existingProductIndex = state.findIndex((item) => {
         return item.id === action.payload.id;
       });
-
       if (existingProductIndex === -1) {
         state.push(action.payload);
       } else {
@@ -60,11 +60,46 @@ const cart = createSlice({
   },
 });
 
+// 장바구니 체크리스트 관리
+interface CartCheckedList {
+  id: number;
+  switch: boolean;
+}
+
+const cartCheckedList = createSlice({
+  name: "cartCheckedList",
+  initialState: [] as CartCheckedList[],
+  reducers: {
+    checkedList(state, action) {
+      // 중복추가 못하게하기
+      const existingProductIndex = state.findIndex((item) => {
+        return item.id === action.payload;
+      });
+      if (existingProductIndex === -1) {
+        state.push({
+          id: action.payload,
+          switch: false,
+        });
+      }
+    },
+    checkedSwitch(state, action) {
+      // id를 파라미터로 받아옴 -> 해당 아이디의 switch 값을 true로 변경
+      // state[action.payload]가 null일경우 해당 정보 추가 후 변경, 있을경우 그냥 변경
+      if (!state[action.payload]) {
+        state[action.payload] = { id: action.payload, switch: false };
+      }
+      state[action.payload].switch = true;
+    },
+  },
+});
+
 export const { addCount, minusCount, addProduct } = cart.actions;
+export const { checkedList, checkedSwitch } = cartCheckedList.actions;
 
 export default configureStore({
   reducer: {
     cart: cart.reducer,
+    cartCheckedList: cartCheckedList.reducer,
   },
 });
 

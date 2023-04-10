@@ -1,19 +1,20 @@
 import React from "react";
 import "../ComponentsCss/Cart.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../Store/store";
-import { addCount, minusCount } from "../Store/store";
+import { addCount, minusCount, checkedSwitch } from "../Store/store";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Data } from "../App";
+
 function Cart() {
   const [clickColor, setClickColor] = useState("");
-  const [productNum, setProductNum] = useState(0);
   //
   const state = useSelector((state: RootState) => state.cart);
+  const checkedState = useSelector((state: RootState) => state.cartCheckedList);
   const dispatch = useDispatch();
   //
-
   return (
     <div className="cart_wrapper">
       <div>
@@ -36,21 +37,22 @@ function Cart() {
           </thead>
           <tbody>
             {/* 클릭 -> 스테이트 변경 -> 해당아이템이 맞는지 검사 -> 맞으면 clickColor붙이지 */}
-            {state.map((item, i) => {
+            {state.map((item: Data, i: number) => {
               return (
                 <tr key={i}>
                   <td style={{ textAlign: "center" }}>
-                    <div>
+                    <div
+                      onClick={() => {
+                        dispatch(checkedSwitch(state[i].id));
+                        // setClickColor("showClickColor");
+                        setTimeout(() => {
+                          console.log(checkedState);
+                        }, 500);
+                      }}
+                    >
                       <FontAwesomeIcon
                         icon={faCheck}
-                        className={`cart_table_checked ${
-                          productNum === i ? clickColor : ""
-                        }`}
-                        onClick={() => {
-                          setProductNum(i);
-                          setClickColor("showClickColor");
-                          console.log(i);
-                        }}
+                        className={`cart_table_checked `}
                       />
                     </div>
                   </td>
@@ -63,7 +65,10 @@ function Cart() {
                         {state[i].title}
                       </div>
                       <div className="cart_table_productsInfo_remain">
-                        <p>매진임박 ({state[i].stocks})개</p>
+                        <p>
+                          매진임박 ({state[i].stocks}
+                          )개
+                        </p>
                         <p>4/11(화) 도착예정</p>
                       </div>
                       <div className="cart_table_productsInfo_count">
