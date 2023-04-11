@@ -1,20 +1,30 @@
-import React from "react";
 import "../ComponentsCss/Cart.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../Store/store";
-import { addCount, minusCount, checkedSwitch } from "../Store/store";
+import { checkedList, RootState } from "../Store/store";
+import {
+  addCount,
+  minusCount,
+  onCheck,
+  offCheck,
+  allOnCheck,
+  allOffCheck,
+  deleteProduct,
+  deleteCheckList,
+} from "../Store/store";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Data } from "../App";
 
 function Cart() {
   const [clickColor, setClickColor] = useState("");
+  const [count, setCount] = useState(0);
   //
   const state = useSelector((state: RootState) => state.cart);
   const checkedState = useSelector((state: RootState) => state.cartCheckedList);
   const dispatch = useDispatch();
   //
+
   return (
     <div className="cart_wrapper">
       <div>
@@ -22,7 +32,21 @@ function Cart() {
           <thead>
             <tr style={{ fontSize: "0.9rem" }}>
               <th style={{ width: "150px" }}>
-                <span>전체선택</span>
+                <button
+                  className="allCheck_btn"
+                  onClick={() => {
+                    // 버튼 누른횟수에따라 체크 선택, 해제
+                    setCount(count + 1);
+                    if (count % 2 === 0) {
+                      dispatch(allOnCheck());
+                      setClickColor("showClickColor");
+                    } else if (count % 2 === 1) {
+                      dispatch(allOffCheck());
+                    }
+                  }}
+                >
+                  전체선택
+                </button>
               </th>
               <th style={{ width: "750px" }}>
                 <span>상품정보</span>
@@ -41,18 +65,20 @@ function Cart() {
               return (
                 <tr key={i}>
                   <td style={{ textAlign: "center" }}>
-                    <div
-                      onClick={() => {
-                        dispatch(checkedSwitch(state[i].id));
-                        // setClickColor("showClickColor");
-                        setTimeout(() => {
-                          console.log(checkedState);
-                        }, 500);
-                      }}
-                    >
+                    <div>
                       <FontAwesomeIcon
                         icon={faCheck}
-                        className={`cart_table_checked `}
+                        className={`cart_table_checked ${
+                          checkedState[i].switch === true ? clickColor : ""
+                        }`}
+                        onClick={() => {
+                          if (checkedState[i].switch === false) {
+                            dispatch(onCheck(i));
+                            setClickColor("showClickColor");
+                          } else if (checkedState[i].switch === true) {
+                            dispatch(offCheck(i));
+                          }
+                        }}
                       />
                     </div>
                   </td>
@@ -89,6 +115,18 @@ function Cart() {
                           +
                         </button>
                       </div>
+                    </div>
+                    {/* 장바구니 삭제기능 */}
+                    <div
+                      className="delete_button"
+                      onClick={() => {
+                        if (window.confirm("삭제하시겠습니까?")) {
+                          dispatch(deleteProduct(i));
+                          dispatch(deleteCheckList(i));
+                        }
+                      }}
+                    >
+                      X
                     </div>
                   </td>
                   <td style={{ textAlign: "center" }}> {state[i].price} ₩</td>

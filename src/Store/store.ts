@@ -57,6 +57,9 @@ const cart = createSlice({
         // DetailsProductsInfo에서 넘겨받은 해당 obj를 state에 push 해줌.
       }
     },
+    deleteProduct(state, action) {
+      state.splice(action.payload, 1);
+    },
   },
 });
 
@@ -82,19 +85,38 @@ const cartCheckedList = createSlice({
         });
       }
     },
-    checkedSwitch(state, action) {
-      // id를 파라미터로 받아옴 -> 해당 아이디의 switch 값을 true로 변경
-      // state[action.payload]가 null일경우 해당 정보 추가 후 변경, 있을경우 그냥 변경
-      if (!state[action.payload]) {
-        state[action.payload] = { id: action.payload, switch: false };
-      }
+    onCheck(state, action) {
+      // index를 파라미터로 받아옴 -> 해당 아이디의 switch 값을 true로 변경
       state[action.payload].switch = true;
+    },
+    offCheck(state, action) {
+      state[action.payload].switch = false;
+    },
+    allOnCheck(state) {
+      state.forEach((item) => {
+        item.switch = true;
+      });
+    },
+    allOffCheck(state) {
+      state.forEach((item) => {
+        item.switch = false;
+      });
+    },
+    deleteCheckList(state, action) {
+      state.splice(action.payload, 1);
     },
   },
 });
 
-export const { addCount, minusCount, addProduct } = cart.actions;
-export const { checkedList, checkedSwitch } = cartCheckedList.actions;
+export const { addCount, minusCount, addProduct, deleteProduct } = cart.actions;
+export const {
+  checkedList,
+  onCheck,
+  offCheck,
+  allOnCheck,
+  allOffCheck,
+  deleteCheckList,
+} = cartCheckedList.actions;
 
 export default configureStore({
   reducer: {
