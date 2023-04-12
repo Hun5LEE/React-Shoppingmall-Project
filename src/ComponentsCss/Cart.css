@@ -6,6 +6,7 @@
 .cart_table {
   margin-top: 2rem;
   margin-left: 1rem;
+  margin-bottom: 2rem;
   border-top: 1px solid #bbbbbb;
   border-collapse: collapse;
   border-spacing: 0;
@@ -97,11 +98,13 @@ td {
   font-weight: 500;
   font-size: 20px;
 }
+/*  */
 
 /*  */
 
 @media screen and (min-width: 1200px) {
   .cart_wrapper {
     flex-direction: row;
+    justify-content: space-between;
   }
 }

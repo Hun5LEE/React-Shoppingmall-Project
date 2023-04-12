@@ -85,3 +85,5 @@ export interface Data {
 
 // 비슷한 페이지 만들시 nested routes 사용.
 // 페이지 여러개 만들때 URL파라미터 유용.
+// useMemo , useEffect는 비슷한 기능을 하지만 실행시점에 차이가 있다.
+// useMemo는 렌더링될때(HTML이 읽힐때같이 읽힘), useEffect는 HTML읽히고 난후

@@ -1,7 +1,8 @@
 import "../ComponentsCss/Cart.css";
-import { useEffect, useState } from "react";
+import CartOrder from "../Components/CartOrder";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { checkedList, RootState } from "../Store/store";
+import { RootState } from "../Store/store";
 import {
   addCount,
   minusCount,
@@ -16,15 +17,15 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Data } from "../App";
 
-function Cart() {
+function Cart(): JSX.Element {
   const [clickColor, setClickColor] = useState("");
   const [count, setCount] = useState(0);
+  const [price, setPrice] = useState(0);
   //
   const state = useSelector((state: RootState) => state.cart);
   const checkedState = useSelector((state: RootState) => state.cartCheckedList);
   const dispatch = useDispatch();
   //
-
   return (
     <div className="cart_wrapper">
       <div>
@@ -35,13 +36,20 @@ function Cart() {
                 <button
                   className="allCheck_btn"
                   onClick={() => {
+                    // reduce 메소드 이용하여 총합계산
+                    const totalPrice = state.reduce(
+                      (sum, item) => sum + item.price,
+                      0
+                    );
                     // 버튼 누른횟수에따라 체크 선택, 해제
                     setCount(count + 1);
                     if (count % 2 === 0) {
+                      setPrice(totalPrice);
                       dispatch(allOnCheck());
                       setClickColor("showClickColor");
                     } else if (count % 2 === 1) {
                       dispatch(allOffCheck());
+                      setPrice(0);
                     }
                   }}
                 >
@@ -75,8 +83,12 @@ function Cart() {
                           if (checkedState[i].switch === false) {
                             dispatch(onCheck(i));
                             setClickColor("showClickColor");
+                            setPrice(price + state[i].price);
                           } else if (checkedState[i].switch === true) {
                             dispatch(offCheck(i));
+                            if (price > 0) {
+                              setPrice(price - state[i].price);
+                            }
                           }
                         }}
                       />
@@ -129,7 +141,14 @@ function Cart() {
                       X
                     </div>
                   </td>
-                  <td style={{ textAlign: "center" }}> {state[i].price} ₩</td>
+                  <td style={{ textAlign: "center" }}>
+                    {" "}
+                    {/* 천단위 콤마넣기 */}
+                    {state[i].price
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
+                    ₩
+                  </td>
                   <td style={{ borderRight: "none", textAlign: "center" }}>
                     무료
                   </td>
@@ -139,7 +158,7 @@ function Cart() {
           </tbody>
         </table>
       </div>
-      <div className="cart_order">주문하기</div>
+      <CartOrder price={price} />
     </div>
   );
 }
