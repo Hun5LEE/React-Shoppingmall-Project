@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 function ProductList(): JSX.Element {
   // Scroll의 위치값에의해 변경되는 UI
   const navigate = useNavigate();
-  const ref = useRef<HTMLDivElement>(null);
-  const secondRef = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLImageElement>(null);
+  const secondRef = useRef<HTMLImageElement>(null);
   const handleScrollArr = [ref, secondRef, null];
   useEffect(() => {
     const handleScroll = () => {
@@ -46,21 +46,13 @@ function ProductList(): JSX.Element {
   //
   return (
     <div className="product_list_wrapper">
-      {/* <div ref={ref} className="product_list">
-        <img src={process.env.PUBLIC_URL + "./Img/card1.png"} alt="" />
-      </div>
-      <div ref={secondRef} className="product_list">
-        <img src={process.env.PUBLIC_URL + "./Img/card2.png"} alt="" />
-      </div>
-      <div className="product_list">
-        <img src={process.env.PUBLIC_URL + "./Img/card3.png"} alt="" />
-      </div> */}
       {handleScrollArr.map((item, i) => {
         return (
-          <div ref={item} className="product_list" key={i}>
+          <div className="product_list" key={i}>
             <img
+              ref={item}
               onClick={() => navigate(`/products${i + 1}`)}
-              src={process.env.PUBLIC_URL + `./Img/card${i + 1}.png`}
+              src={process.env.PUBLIC_URL + `./Img/ProductList${i + 1}.jpg`}
               alt=""
             />
           </div>

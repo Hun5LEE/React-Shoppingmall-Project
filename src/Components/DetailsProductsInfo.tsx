@@ -45,7 +45,7 @@ function DetailsProductsInfo({
             dispatch(addProduct(productsList[Number(id)]));
             dispatch(checkedList(Number(id)));
 
-            const cartItems = localStorage.getItem("cartItems") as string;
+            const cartItems = sessionStorage.getItem("cartItems") as string;
             const parsedCartItems = JSON.parse(cartItems);
             // 중복 추가 못하게함.
             if (
@@ -54,7 +54,7 @@ function DetailsProductsInfo({
               }) === undefined
             ) {
               parsedCartItems.push(productsList[Number(id)]);
-              localStorage.setItem(
+              sessionStorage.setItem(
                 "cartItems",
                 JSON.stringify(parsedCartItems)
               );

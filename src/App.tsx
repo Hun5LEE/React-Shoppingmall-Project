@@ -6,32 +6,36 @@ import ProductList from "./Components/ProductList";
 import FirstProducts from "./Pages/FirstProducts";
 import Details from "./Pages/Details";
 import Cart from "./Pages/Cart";
-import data from "./Data/Data";
+import RecentlyWatched from "./Components/RecentlyWatched";
+import Login from "./Pages/Login";
+import { data } from "./Data/Data";
 
 function App(): JSX.Element {
   const navigate: NavigateFunction = useNavigate();
   const productsData: Data[] = data;
+
   // 페이지 처음 로드시 localStorage key value 생성
   useEffect(() => {
     // 이미 있으면 초기화 (X)
-    if (localStorage.getItem("cartItems") === null) {
-      localStorage.setItem("cartItems", JSON.stringify([]));
+    if (sessionStorage.getItem("cartItems") === null) {
+      sessionStorage.setItem("cartItems", JSON.stringify([]));
     }
   }, []);
 
   return (
     <div className="App">
-      <Header navigate={navigate} />
       <Routes>
         <Route
           path="/"
           element={
             <>
+              <Header navigate={navigate} />
               <img
                 className="main_bg"
-                src={process.env.PUBLIC_URL + "./Img/bg.png"}
+                src={process.env.PUBLIC_URL + "./Img/main_bg.avif"}
                 alt=""
               />
+              <RecentlyWatched navigate={navigate} />
               <ProductList />
             </>
           }
@@ -40,20 +44,30 @@ function App(): JSX.Element {
           path="/products1"
           element={
             <>
+              <Header navigate={navigate} />
               <img
                 className="main_bg"
-                src={process.env.PUBLIC_URL + "./Img/bg.png"}
+                src={process.env.PUBLIC_URL + "./Img/main_bg.avif"}
                 alt=""
               />
               <FirstProducts navigate={navigate} productsData={productsData} />
             </>
           }
-        ></Route>
+        />
         <Route
           path="/products1/details/:id"
           element={
             <>
+              <Header navigate={navigate} />
               <Details productsData={productsData} />
+            </>
+          }
+        />
+        <Route
+          path="/Login"
+          element={
+            <>
+              <Login />
             </>
           }
         />
@@ -61,6 +75,7 @@ function App(): JSX.Element {
           path="/cart"
           element={
             <>
+              <Header navigate={navigate} />
               <Cart />
             </>
           }

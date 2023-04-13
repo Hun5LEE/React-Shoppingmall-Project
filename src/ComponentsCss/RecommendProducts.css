@@ -1,0 +1,23 @@
+.recommendproducts {
+  margin: 0 1rem;
+}
+
+.recommendproducts_wrapper {
+  border-bottom: 1px solid #eeeeee;
+  border-top: 1px solid #bbbbbb;
+  display: flex;
+  height: 250px;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.recommendproducts_info img {
+  width: 150px;
+  height: 150px;
+}
+
+.recommendproducts_info div {
+  border: 1px solid #eeeeee;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}

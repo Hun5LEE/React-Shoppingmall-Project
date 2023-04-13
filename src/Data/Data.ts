@@ -39,5 +39,3 @@ export const data: Item[] = [
     stocks: 3,
   },
 ];
-
-export default data;

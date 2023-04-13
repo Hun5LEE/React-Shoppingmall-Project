@@ -34,7 +34,7 @@ function Header({ navigate }: HeaderProps): JSX.Element {
             <FontAwesomeIcon icon={faBagShopping} size="xl" />
             <span> Shopping Bag </span>
           </div>
-          <div>
+          <div onClick={() => navigate("/Login")}>
             <FontAwesomeIcon icon={faArrowRightToBracket} size="xl" />
             <span> Login </span>
           </div>

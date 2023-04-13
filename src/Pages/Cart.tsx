@@ -1,5 +1,6 @@
 import "../ComponentsCss/Cart.css";
 import CartOrder from "../Components/CartOrder";
+import RecommendProducts from "../Components/RecommendProducts";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../Store/store";
@@ -38,7 +39,7 @@ function Cart(): JSX.Element {
                   onClick={() => {
                     // reduce 메소드 이용하여 총합계산
                     const totalPrice = state.reduce(
-                      (sum, item) => sum + item.price,
+                      (sum, item) => sum + item.price * item.count,
                       0
                     );
                     // 버튼 누른횟수에따라 체크 선택, 해제
@@ -83,11 +84,11 @@ function Cart(): JSX.Element {
                           if (checkedState[i].switch === false) {
                             dispatch(onCheck(i));
                             setClickColor("showClickColor");
-                            setPrice(price + state[i].price);
+                            setPrice(price + state[i].price * state[i].count);
                           } else if (checkedState[i].switch === true) {
                             dispatch(offCheck(i));
                             if (price > 0) {
-                              setPrice(price - state[i].price);
+                              setPrice(price - state[i].price * state[i].count);
                             }
                           }
                         }}
@@ -113,6 +114,12 @@ function Cart(): JSX.Element {
                         <button
                           onClick={() => {
                             dispatch(minusCount(state[i].id));
+                            // check On 일때
+                            if (checkedState[i].switch === true) {
+                              if (state[i].count > 1) {
+                                setPrice(price - state[i].price);
+                              }
+                            }
                           }}
                         >
                           -
@@ -123,7 +130,17 @@ function Cart(): JSX.Element {
                           {" "}
                           {state[i].count}{" "}
                         </span>
-                        <button onClick={() => dispatch(addCount(state[i].id))}>
+                        <button
+                          onClick={() => {
+                            dispatch(addCount(state[i].id));
+                            // check On 일때
+                            if (checkedState[i].switch === true) {
+                              if (state[i].count < state[i].stocks) {
+                                setPrice(price + state[i].price);
+                              }
+                            }
+                          }}
+                        >
                           +
                         </button>
                       </div>
@@ -135,6 +152,7 @@ function Cart(): JSX.Element {
                         if (window.confirm("삭제하시겠습니까?")) {
                           dispatch(deleteProduct(i));
                           dispatch(deleteCheckList(i));
+                          setPrice(price - state[i].price * state[i].count);
                         }
                       }}
                     >
@@ -157,6 +175,7 @@ function Cart(): JSX.Element {
             })}
           </tbody>
         </table>
+        <RecommendProducts />
       </div>
       <CartOrder price={price} />
     </div>

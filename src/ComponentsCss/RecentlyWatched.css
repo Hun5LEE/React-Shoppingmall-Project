@@ -1,0 +1,39 @@
+.recently_watched_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  position: fixed;
+  right: 2rem;
+  top: 12rem;
+  border: 1px solid #bbbbbb;
+  width: 120px;
+  background-color: white;
+  z-index: 5;
+}
+
+.recently_watched_cart {
+  background-color: #444444;
+  color: white;
+  border-bottom: 1px solid #bbbbbb;
+  padding: 0.2rem 0;
+}
+
+.recently_watched_products h4 {
+  margin: 0.5rem 0;
+}
+
+.recently_watched_products img {
+  border: 1px solid #eeeeee;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+.recently_watched_topBtn {
+  background-color: #bbbbbb;
+  color: white;
+  padding: 0.2rem 0;
+  border-top: 1px solid #bbbbbb;
+}
