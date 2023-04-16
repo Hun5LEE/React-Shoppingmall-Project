@@ -1,9 +1,9 @@
-import "../ComponentsCss/Cart.css";
-import CartOrder from "../Components/CartOrder";
-import RecommendProducts from "../Components/RecommendProducts";
+import "../PagesCss/Cart.css";
+import CartOrder from "../components/cart/CartOrder";
+import RecommendProducts from "../components/recent/RecommendProducts";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../Store/store";
+import { RootState } from "../store/store";
 import {
   addCount,
   minusCount,
@@ -13,7 +13,7 @@ import {
   allOffCheck,
   deleteProduct,
   deleteCheckList,
-} from "../Store/store";
+} from "../store/store";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Data } from "../App";

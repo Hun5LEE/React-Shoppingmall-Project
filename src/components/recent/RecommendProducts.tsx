@@ -1,25 +1,25 @@
-import "../ComponentsCss/RecommendProducts.css";
+import "./RecommendProducts.css";
 import { useMemo, useState, memo } from "react";
-import { data } from "../Data/Data";
+import { data } from "../../Data/Data";
 import { useNavigate } from "react-router-dom";
-import { Data } from "../App";
+import { Data } from "../../App";
 
 // memo를 사용해서 상위 컴포넌트가 렌더링 될때 불필요한 렌더링을 막아서 추천상품을 보여주게함.
 const RecommendProducts = memo(() => {
   const [productsList, setProductsList] = useState([...data]);
   const navigate = useNavigate();
   // useEffect 대신 useMemo를 사용하여 실행시점을 앞당겨 배열을 합침.
-  useMemo(() => {
-    fetch("/Products/ShoeProducts.json")
-      .then((data) => data.json())
-      .then((result) => {
-        const copy = [...productsList, ...result];
-        setProductsList(copy);
-      })
-      .catch(() => {
-        alert("실패");
-      });
-  }, []);
+  // useMemo(() => {
+  //   fetch("/Products/ShoeProducts.json")
+  //     .then((data) => data.json())
+  //     .then((result) => {
+  //       const copy = [...productsList, ...result];
+  //       setProductsList(copy);
+  //     })
+  //     .catch(() => {
+  //       alert("실패");
+  //     });
+  // }, []);
 
   return (
     <div className="recommendproducts">

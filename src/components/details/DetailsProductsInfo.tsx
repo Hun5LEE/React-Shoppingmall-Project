@@ -1,9 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Data } from "../App";
-import { useDispatch } from "react-redux";
-import { RootState } from "../Store/store";
-import { addProduct, checkedList } from "../Store/store";
+import { Data } from "../../App";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import { addProduct, checkedList } from "../../store/store";
 
 // 더보기 상품들 디테일 페이지로 들어갔을때 새로고침하면 상품정보 부분을
 // 비동기적으로 처리했기 때문에 값을 읽어올수 없음 -> 따로 컴포넌트로 빼서 HTML이 읽힐때 읽어오게함.
@@ -22,17 +22,17 @@ function DetailsProductsInfo({
   const [productsList, setProductsList] = useState(productsData);
   const dispatch = useDispatch();
   //
-  useEffect(() => {
-    fetch("/Products/ShoeProducts.json")
-      .then((data) => data.json())
-      .then((result) => {
-        const copy = [...productsList, ...result];
-        setProductsList(copy);
-      })
-      .catch(() => {
-        alert("실패");
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch("/Products/ShoeProducts.json")
+  //     .then((data) => data.json())
+  //     .then((result) => {
+  //       const copy = [...productsList, ...result];
+  //       setProductsList(copy);
+  //     })
+  //     .catch(() => {
+  //       alert("실패");
+  //     });
+  // }, []);
   if (productsList.length > 3) {
     return (
       <>

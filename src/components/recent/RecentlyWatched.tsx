@@ -1,9 +1,9 @@
 import React from "react";
-import "../ComponentsCss/RecentlyWatched.css";
+import "./RecentlyWatched.css";
 import { useSelector } from "react-redux";
-import { RootState } from "../Store/store";
+import { RootState } from "../../store/store";
 import { NavigateFunction } from "react-router-dom";
-import { Data } from "../App";
+import { Data } from "../../App";
 
 function RecentlyWatched({
   navigate,

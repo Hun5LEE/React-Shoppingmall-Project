@@ -1,0 +1,20 @@
+[
+  {
+    "id": 0,
+    "title": "title",
+    "description": "description",
+    "imgUrl": "/Img/category1.jpg"
+  },
+  {
+    "id": 1,
+    "title": "title",
+    "description": "description",
+    "imgUrl": "/Img/category2.jpg"
+  },
+  {
+    "id": 2,
+    "title": "title",
+    "description": "description",
+    "imgUrl": "/Img/category3.jpg"
+  }
+]

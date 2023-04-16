@@ -1,5 +1,5 @@
 import React from "react";
-import "../ComponentsCss/CartOrder.css";
+import "./CartOrder.css";
 
 function CartOrder({ price }: { price: number }): JSX.Element {
   return (

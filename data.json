@@ -1,0 +1,103 @@
+{
+  "categories": [
+    {
+      "id": 0,
+      "title": "title",
+      "description": "description",
+      "imgUrl": "/Img/category1.jpg",
+      "products": [
+        {
+          "id": 0,
+          "title": "White and Black",
+          "content": "Born in France",
+          "price": 120000,
+          "imgUrl": "/Img/shoes/shoes1.jpg",
+          "count": 1,
+          "stocks": 5
+        },
+
+        {
+          "id": 1,
+          "title": "Red Knit",
+          "content": "Born in Seoul",
+          "price": 110000,
+          "imgUrl": "/Img/shoes/shoes2.jpg",
+          "count": 1,
+          "stocks": 8
+        },
+
+        {
+          "id": 2,
+          "title": "Grey Yordan",
+          "content": "Born in the States",
+          "price": 130000,
+          "imgUrl": "/Img/shoes/shoes3.jpg",
+          "count": 1,
+          "stocks": 3
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "title": "title",
+      "description": "description",
+      "imgUrl": "/Img/category2.jpg",
+      "products": [
+        {
+          "id": 3,
+          "title": "Flowey",
+          "content": "only 5 inches",
+          "price": 139000,
+          "imgUrl": "/Img/shoes/shoes4.jpg",
+          "count": 1,
+          "stocks": 4
+        },
+        {
+          "id": 4,
+          "title": "Baby shoes",
+          "content": "for less than 6",
+          "price": 159000,
+          "imgUrl": "/Img/shoes/shoes5.jpg",
+          "count": 1,
+          "stocks": 9
+        },
+        {
+          "id": 5,
+          "title": "Red Herring",
+          "content": "Born in France",
+          "price": 100000,
+          "imgUrl": "/Img/shoes/shoes6.jpg",
+          "count": 1,
+          "stocks": 13
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "title",
+      "description": "description",
+      "imgUrl": "/Img/category3.jpg",
+      "products": [
+        {
+          "id": 6,
+          "title": "Flowey",
+          "content": "only 5 inches",
+          "price": 129000,
+          "imgUrl": "/Img/shoes/shoes7.jpg",
+          "count": 1,
+          "stocks": 2
+        },
+        {
+          "id": 7,
+          "title": "Baby shoes",
+          "content": "for less than 6",
+          "price": 179000,
+          "imgUrl": "/Img/shoes/shoes8.jpg",
+          "count": 1,
+          "stocks": 1
+        }
+      ]
+    }
+  ],
+  "cart": []
+}

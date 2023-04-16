@@ -1,25 +1,36 @@
-import React, { useEffect } from "react";
-import { Routes, Route, useNavigate, NavigateFunction } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import "./App.css";
-import Header from "./Components/Header";
-import ProductList from "./Components/ProductList";
-import FirstProducts from "./Pages/FirstProducts";
-import Details from "./Pages/Details";
-import Cart from "./Pages/Cart";
-import RecentlyWatched from "./Components/RecentlyWatched";
-import Login from "./Pages/Login";
+import Header from "./components/header/Header";
+import CategoryList from "./components/homeComponents/category/CategoryList";
+import { Routes, Route, useNavigate, NavigateFunction } from "react-router-dom";
 import { data } from "./Data/Data";
+import axios from "axios";
+import ProductsPage from "./pages/products";
 
 function App(): JSX.Element {
   const navigate: NavigateFunction = useNavigate();
-  const productsData: Data[] = data;
+  // const productsData: Data[] = data;
+  const [categoryData, setCategoryData] = useState([]);
 
-  // 페이지 처음 로드시 localStorage key value 생성
+  // 첫페이지 mount할때 useEffect로 비동기처리 즉시 호출하여 데이터 받아오기. -> Destructuring 하여 변수에 할당
   useEffect(() => {
-    // 이미 있으면 초기화 (X)
-    if (sessionStorage.getItem("cartItems") === null) {
-      sessionStorage.setItem("cartItems", JSON.stringify([]));
-    }
+    const source = axios.CancelToken.source();
+    (async () => {
+      try {
+        const { data } = await axios.get("http://localhost:4000/categories", {
+          cancelToken: source.token,
+        });
+        //category 데이터
+        setCategoryData(data);
+      } catch (error) {
+        alert("실패");
+        console.log(error);
+      }
+    })();
+    return () => {
+      // 랜더링시 이전요청 삭제해줌. (불필요한 요청누적 방지)
+      source.cancel("랜더링시 이전요청 삭제");
+    };
   }, []);
 
   return (
@@ -35,26 +46,25 @@ function App(): JSX.Element {
                 src={process.env.PUBLIC_URL + "./Img/main_bg.avif"}
                 alt=""
               />
-              <RecentlyWatched navigate={navigate} />
-              <ProductList />
+              <CategoryList data={categoryData} />
             </>
           }
         />
         <Route
-          path="/products1"
+          path="categories/products/:id"
           element={
             <>
               <Header navigate={navigate} />
-              <img
+              {/* <img
                 className="main_bg"
                 src={process.env.PUBLIC_URL + "./Img/main_bg.avif"}
                 alt=""
-              />
-              <FirstProducts navigate={navigate} productsData={productsData} />
+              /> */}
+              <ProductsPage />
             </>
           }
         />
-        <Route
+        {/* <Route
           path="/products1/details/:id"
           element={
             <>
@@ -80,7 +90,7 @@ function App(): JSX.Element {
             </>
           }
         />
-        <Route path="*" element={<h1>404 Pages</h1>} />
+        // <Route path="*" element={<h1>404 Pages</h1>} /> */}
       </Routes>
     </div>
   );

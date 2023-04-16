@@ -1,7 +1,7 @@
 import React from "react";
 import { NavigateFunction } from "react-router-dom";
 import { useState, useEffect } from "react";
-import "../ComponentsCss/FirstProducts.css";
+import "../PagesCss/Products.css";
 import { Data } from "../App";
 
 interface FirstProductsProps {
@@ -18,23 +18,23 @@ function FirstProducts({
   // 더보기 상품의 클릭횟수를 저장해서 누른만큼 상품을 3개씩 보여주도록 하기.
   const [btnCount, setBtnCount] = useState(0);
   // btnCount가 1로 바뀌고 실행하기 위해 useEffect사용
-  useEffect(() => {
-    // axios.get("/Products/ShoeProducts.json").then() ==
-    fetch("/Products/ShoeProducts.json")
-      .then((data) => data.json())
-      .then((result) => {
-        const copyProducts = [...shoes];
-        if (btnCount === 1) {
-          setShoes(copyProducts.concat(result.slice(0, 3)));
-        } else if (btnCount === 2) {
-          setShoes(copyProducts.concat(result.slice(3, result.length)));
-          setHidden("hidden");
-        }
-      })
-      .catch(() => {
-        alert("실패");
-      });
-  }, [btnCount]);
+  // useEffect(() => {
+  //   // axios.get("/Products/ShoeProducts.json").then() ==
+  //   fetch("/Products/ShoeProducts.json")
+  //     .then((data) => data.json())
+  //     .then((result) => {
+  //       const copyProducts = [...shoes];
+  //       if (btnCount === 1) {
+  //         setShoes(copyProducts.concat(result.slice(0, 3)));
+  //       } else if (btnCount === 2) {
+  //         setShoes(copyProducts.concat(result.slice(3, result.length)));
+  //         setHidden("hidden");
+  //       }
+  //     })
+  //     .catch(() => {
+  //       alert("실패");
+  //     });
+  // }, [btnCount]);
   return (
     <>
       <button

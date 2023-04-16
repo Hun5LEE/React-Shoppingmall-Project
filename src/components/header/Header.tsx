@@ -1,5 +1,5 @@
 import React from "react";
-import "../ComponentsCss/Header.css";
+import "./Header.css";
 import {
   faArrowRightToBracket,
   faMagnifyingGlass,
@@ -9,19 +9,23 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavigateFunction } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 interface HeaderProps {
   navigate: NavigateFunction;
 }
 
 function Header({ navigate }: HeaderProps): JSX.Element {
+  const state = useSelector((state: RootState) => state.cart);
+
   return (
     <div className="header">
       <div className="header_firstRow">
         <div className="header_logo">
           <img
             onClick={() => navigate("/")}
-            src={process.env.PUBLIC_URL + "/Img/stussy.jpg"}
+            src={process.env.PUBLIC_URL + "/Img/logo.jpg"}
             alt=""
           />
         </div>
@@ -32,7 +36,7 @@ function Header({ navigate }: HeaderProps): JSX.Element {
           </div>
           <div onClick={() => navigate("/cart")}>
             <FontAwesomeIcon icon={faBagShopping} size="xl" />
-            <span> Shopping Bag </span>
+            <span> Shopping Bag({state.length}) </span>
           </div>
           <div onClick={() => navigate("/Login")}>
             <FontAwesomeIcon icon={faArrowRightToBracket} size="xl" />

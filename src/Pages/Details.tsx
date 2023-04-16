@@ -1,7 +1,7 @@
 import React from "react";
-import "../ComponentsCss/Details.css";
-import DetailsTab from "../Components/DetailsTab";
-import DetailsProductsInfo from "../Components/DetailsProductsInfo";
+import "../PagesCss/Details.css";
+import DetailsTab from "../components/details/DetailsTab";
+import DetailsProductsInfo from "../components/details/DetailsProductsInfo";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Data } from "../App";

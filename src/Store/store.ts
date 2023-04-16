@@ -1,10 +1,10 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 export interface RootState {
   cart: Cart[];
   cartCheckedList: CartCheckedList[];
 }
-
 interface Cart {
   id: number;
   title: string;
@@ -14,6 +14,30 @@ interface Cart {
   count: number;
   stocks: number;
 }
+
+export interface CategoryList {
+  id: number;
+  title: string;
+  description: string;
+  imgUrl: string;
+}
+
+const categoryList = createSlice({
+  name: "categoryList",
+  initialState: [] as CategoryList[],
+  reducers: {
+    addCategoryList(state) {
+      fetch("/Products/ShoeProducts.json")
+        .then((data) => data.json())
+        .then((result) => {
+          state.concat([...result]);
+        })
+        .catch(() => {
+          alert("실패");
+        });
+    },
+  },
+});
 
 // 장바구니 관리
 const cart = createSlice({
@@ -108,6 +132,7 @@ const cartCheckedList = createSlice({
   },
 });
 
+export const { addCategoryList } = categoryList.actions;
 export const { addCount, minusCount, addProduct, deleteProduct } = cart.actions;
 export const {
   checkedList,
@@ -120,6 +145,7 @@ export const {
 
 export default configureStore({
   reducer: {
+    categoryList: categoryList.reducer,
     cart: cart.reducer,
     cartCheckedList: cartCheckedList.reducer,
   },

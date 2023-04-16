@@ -1,5 +1,5 @@
 import React from "react";
-import "../ComponentsCss/DetailsTab.css";
+import "./DetailsTab.css";
 import { useEffect, useState } from "react";
 
 function DetailsTab(): JSX.Element {
