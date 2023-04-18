@@ -1,5 +1,4 @@
-.products_wrapper button {
-  margin: 1rem;
+.details_button button {
   width: 100px;
   height: 32px;
   border-radius: 5px;
@@ -7,8 +6,7 @@
   color: white;
   background-color: #e13c52;
   cursor: pointer;
-}
-
-.hidden {
-  visibility: hidden;
+  margin-bottom: 1rem;
+  visibility: visible;
+  margin: 1rem;
 }

@@ -3,9 +3,10 @@ import "./App.css";
 import Header from "./components/header/Header";
 import CategoryList from "./components/homeComponents/category/CategoryList";
 import { Routes, Route, useNavigate, NavigateFunction } from "react-router-dom";
-import { data } from "./Data/Data";
 import axios from "axios";
 import ProductsPage from "./pages/products";
+import DetailsPage from "./pages/details";
+import CartPage from "./pages/cart";
 
 function App(): JSX.Element {
   const navigate: NavigateFunction = useNavigate();
@@ -51,7 +52,7 @@ function App(): JSX.Element {
           }
         />
         <Route
-          path="categories/products/:id"
+          path="/categories/products/:categoryId"
           element={
             <>
               <Header navigate={navigate} />
@@ -64,33 +65,33 @@ function App(): JSX.Element {
             </>
           }
         />
-        {/* <Route
-          path="/products1/details/:id"
+        <Route
+          path="/categories/products/:categoryId/details/:productId"
           element={
             <>
               <Header navigate={navigate} />
-              <Details productsData={productsData} />
+              <DetailsPage />
             </>
           }
         />
-        <Route
+        {/* {/* <Route
           path="/Login"
           element={
             <>
               <Login />
             </>
           }
-        />
+        /> */}
         <Route
           path="/cart"
           element={
             <>
               <Header navigate={navigate} />
-              <Cart />
+              <CartPage />
             </>
           }
         />
-        // <Route path="*" element={<h1>404 Pages</h1>} /> */}
+        {/* // <Route path="*" element={<h1>404 Pages</h1>} /> */}
       </Routes>
     </div>
   );

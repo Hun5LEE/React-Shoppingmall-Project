@@ -68,8 +68,8 @@ const cart = createSlice({
     addProduct(state, action) {
       // 주문하기 눌렀을때 만약 배열에 해당 상품이 있다 -> 그러면 count만 + 1 없으면 push
       // 해당하는 상품의 인덱스를 담는다 없으면 -1
-      const existingProductIndex = state.findIndex((item) => {
-        return item.id === action.payload.id;
+      const existingProductIndex = state.findIndex((product) => {
+        return product.id === action.payload.id;
       });
       if (existingProductIndex === -1) {
         state.push(action.payload);
@@ -78,7 +78,7 @@ const cart = createSlice({
         state[existingProductIndex].count <
           state[existingProductIndex].stocks &&
           state[existingProductIndex].count++;
-        // DetailsProductsInfo에서 넘겨받은 해당 obj를 state에 push 해줌.
+        console.log(state[1]);
       }
     },
     deleteProduct(state, action) {

@@ -1,4 +1,3 @@
-import React from "react";
 import "./DetailsTab.css";
 import { useEffect, useState } from "react";
 
@@ -18,12 +17,12 @@ function DetailsTab(): JSX.Element {
   }, [tab]);
 
   return (
-    <div className="detailsTab">
+    <div className="details_tab">
       <div
         className={
           tab[0]
-            ? `detailsTab_productInfo ${clickShow}`
-            : "detailsTab_productInfo"
+            ? `details_tab_productInfo ${clickShow}`
+            : "details_tab_productInfo"
         }
         onClick={() => handleOnClick(0)}
       >
@@ -31,14 +30,14 @@ function DetailsTab(): JSX.Element {
       </div>
       <div
         className={
-          tab[1] ? `detailsTab_review ${clickShow}` : "detailsTab_review"
+          tab[1] ? `details_tab_review ${clickShow}` : "details_tab_review"
         }
         onClick={() => handleOnClick(1)}
       >
         리뷰
       </div>
       <div
-        className={tab[2] ? `detailsTab_QA ${clickShow}` : "detailsTab_QA"}
+        className={tab[2] ? `details_tab_QA ${clickShow}` : "details_tab_QA"}
         onClick={() => handleOnClick(2)}
       >
         Q&A

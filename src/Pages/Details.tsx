@@ -1,64 +1,38 @@
-import React from "react";
-import "../PagesCss/Details.css";
-import DetailsTab from "../components/details/DetailsTab";
-import DetailsProductsInfo from "../components/details/DetailsProductsInfo";
+import DetailsInfo from "../components/details/DetailsInfo";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Data } from "../App";
+import axios from "axios";
+import { Product } from "./products";
 
-interface DetailsProps {
-  productsData: Data[];
-}
-
-function Details({ productsData }: DetailsProps): JSX.Element {
-  // useParams는 현재 url에 입력한 숫자를 남겨줌. ( string 타입으로 받아옴 )
-  const { id } = useParams<{ id: string | undefined }>();
-  // useState
-  const [visible, setVisible] = useState("");
-  const [text, setText] = useState("");
-
-  // useEffect
+function DetailsPage(): JSX.Element {
+  const { categoryId, productId } = useParams();
+  const [product, setProduct] = useState<any>([]);
+  //
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setVisible("visible");
-    }, 100);
+    const source = axios.CancelToken.source();
+    (async () => {
+      try {
+        const {
+          data: { products },
+        } = await axios.get(`http://localhost:4000/categories/${categoryId}`, {
+          cancelToken: source.token,
+        });
+        setProduct(products[Number(productId)]);
+      } catch (error) {
+        alert("실패");
+      }
+    })();
     return () => {
-      // 서버데이터 요청상황에서 기존데이터요청 제거할때도 cleanup function 사용
-      // 기존 타머 제거해주기.
-      clearTimeout(timer);
+      // 랜더링시 이전요청 삭제해줌. (불필요한 요청누적 방지)
+      source.cancel("랜더링시 이전요청 삭제");
     };
   }, []);
 
   return (
     <>
-      <DetailsTab />
-      <div className={`container_wrapper ${visible}`}>
-        <div className="container">
-          <img
-            src={
-              process.env.PUBLIC_URL + `/Img/shoes/shoes${Number(id) + 1}.jpg`
-            }
-            alt=""
-          />
-        </div>
-        <div className="product_detail">
-          <DetailsProductsInfo productsData={productsData} id={id} />
-
-          <input
-            value={text}
-            placeholder="숫자를 입력하세요."
-            onChange={(e) => {
-              if (!isNaN(Number(e.target.value))) {
-                setText(e.target.value);
-              } else {
-                alert("숫자를 입력하세요.");
-              }
-            }}
-          />
-        </div>
-      </div>
+      <DetailsInfo data={product} />
     </>
   );
 }
 
-export default Details;
+export default DetailsPage;

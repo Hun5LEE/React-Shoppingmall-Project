@@ -1,31 +1,27 @@
-.container_wrapper {
+.details_info_wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 3rem;
   opacity: 0;
   transition: all 1s;
 }
 
-.container img {
+.details_info img {
   height: 400px;
-  object-fit: contain;
 }
 
-.product_detail {
+.details_info {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.product_detail h3,
-.product_detail p {
+.details_info h3,
+.details_info p {
   margin-bottom: 10px;
 }
 
 .visible {
   opacity: 1;
-}
-
-.product_detail input {
-  text-align: center;
 }

@@ -10,7 +10,7 @@ function CategoryItem({ data: category }: CategoryItemProps): JSX.Element {
   const { id, title, description, imgUrl } = category;
 
   return (
-    <Link to={`categories/products/${id}`}>
+    <Link to={`/categories/products/${id}`}>
       <div className="category_wrapper">
         <div className="category_img">
           <img src={imgUrl} alt="" />
