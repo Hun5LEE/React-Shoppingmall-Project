@@ -1,43 +1,26 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { Product } from "../pages/products";
 
 export interface RootState {
   cart: Cart[];
   cartCheckedList: CartCheckedList[];
 }
+
+// 장바구니 체크리스트 관리
+interface CartCheckedList {
+  id: number;
+  switch: boolean;
+}
+
 interface Cart {
   id: number;
   title: string;
   content: string;
   price: number;
-  img: string;
+  imgUrl: string;
   count: number;
   stocks: number;
 }
-
-export interface CategoryList {
-  id: number;
-  title: string;
-  description: string;
-  imgUrl: string;
-}
-
-const categoryList = createSlice({
-  name: "categoryList",
-  initialState: [] as CategoryList[],
-  reducers: {
-    addCategoryList(state) {
-      fetch("/Products/ShoeProducts.json")
-        .then((data) => data.json())
-        .then((result) => {
-          state.concat([...result]);
-        })
-        .catch(() => {
-          alert("실패");
-        });
-    },
-  },
-});
 
 // 장바구니 관리
 const cart = createSlice({
@@ -68,46 +51,55 @@ const cart = createSlice({
     addProduct(state, action) {
       // 주문하기 눌렀을때 만약 배열에 해당 상품이 있다 -> 그러면 count만 + 1 없으면 push
       // 해당하는 상품의 인덱스를 담는다 없으면 -1
-      const existingProductIndex = state.findIndex((product) => {
-        return product.id === action.payload.id;
-      });
-      if (existingProductIndex === -1) {
-        state.push(action.payload);
-      } else {
-        // 주문하기 버튼 누를시 count + 1 이지만  stocks보다 초과못하게함.
-        state[existingProductIndex].count <
-          state[existingProductIndex].stocks &&
-          state[existingProductIndex].count++;
-        console.log(state[1]);
-      }
+      //   const existingProductIndex = state.findIndex((product) => {
+      //     return product.id === action.payload.id;
+      //   });
+      //   if (existingProductIndex === -1) {
+      //     state.push(action.payload);
+      //   } else {
+      //     // 주문하기 버튼 누를시 count + 1 이지만  stocks보다 초과못하게함.
+      //     state[existingProductIndex].count <
+      //       state[existingProductIndex].stocks &&
+      //       state[existingProductIndex].count++;
+      //     console.log(state[1]);
+      //   }
+      // },
+      // deleteProduct(state, action) {
+      //   state.splice(action.payload, 1);
+      // splice메소드를 이용하여 기존 배열의 요소를 초기화 하고 push 해주기. (버그 방지)
+      state.splice(0, state.length);
+      state.push(...action.payload);
     },
     deleteProduct(state, action) {
-      state.splice(action.payload, 1);
+      // 넘겨받은 id와 일치하는 index를 찾고 splice 메소드를 이용하여 해당 요소 삭제.
+      const existingProductIndex = state.findIndex((product) => {
+        return product.id === action.payload;
+      });
+      state.splice(existingProductIndex, 1);
     },
   },
 });
-
-// 장바구니 체크리스트 관리
-interface CartCheckedList {
-  id: number;
-  switch: boolean;
-}
 
 const cartCheckedList = createSlice({
   name: "cartCheckedList",
   initialState: [] as CartCheckedList[],
   reducers: {
     checkedList(state, action) {
-      // 중복추가 못하게하기
-      const existingProductIndex = state.findIndex((item) => {
-        return item.id === action.payload;
-      });
-      if (existingProductIndex === -1) {
+      // 기존배열 남아있으면 삭제
+      state.splice(0, state.length);
+      action.payload.forEach((item: Product) => {
         state.push({
-          id: action.payload,
+          id: item.id,
           switch: false,
         });
-      }
+      });
+    },
+    deleteCheckList(state, action) {
+      // id를 파라미터로 넘겨받고 id와 일치하는 해당인덱스를 찾아 해당 인덱스요소 삭제
+      const existingProductIndex = state.findIndex((product) => {
+        return product.id === action.payload;
+      });
+      state.splice(existingProductIndex, 1);
     },
     onCheck(state, action) {
       // index를 파라미터로 받아옴 -> 해당 아이디의 switch 값을 true로 변경
@@ -126,13 +118,9 @@ const cartCheckedList = createSlice({
         item.switch = false;
       });
     },
-    deleteCheckList(state, action) {
-      state.splice(action.payload, 1);
-    },
   },
 });
 
-export const { addCategoryList } = categoryList.actions;
 export const { addCount, minusCount, addProduct, deleteProduct } = cart.actions;
 export const {
   checkedList,
@@ -145,7 +133,6 @@ export const {
 
 export default configureStore({
   reducer: {
-    categoryList: categoryList.reducer,
     cart: cart.reducer,
     cartCheckedList: cartCheckedList.reducer,
   },

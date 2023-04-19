@@ -18,8 +18,9 @@ function DetailsPage(): JSX.Element {
           cancelToken: source.token,
         });
         setProduct(products[Number(productId)]);
-      } catch (error) {
+      } catch (err) {
         alert("실패");
+        console.log(err);
       }
     })();
     return () => {

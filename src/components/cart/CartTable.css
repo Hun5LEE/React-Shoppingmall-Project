@@ -1,0 +1,104 @@
+.cart_wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.cart_table {
+  margin-top: 2rem;
+  margin-left: 1rem;
+  margin-bottom: 2rem;
+  border-top: 1px solid #bbbbbb;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.allCheck_btn {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid #bbbbbb;
+  background-color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+td {
+  border-top: 1px solid #eeeeee;
+  border-right: 1px solid #eeeeee;
+}
+
+.cart_table_checked {
+  padding: 0.5rem;
+  border: 1px solid #dddddd;
+  color: #eeeeee;
+  border-radius: 50%;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.showClickColor {
+  background-color: #e13c52;
+  color: white;
+  border: none;
+}
+
+/* Info */
+.cart_table_productsInfo_wrapper {
+  display: flex;
+  padding: 1rem;
+}
+
+.cart_table_productsInfo_img {
+  width: 35%;
+  padding-right: 2rem;
+}
+
+.cart_table_productsInfo_img img {
+  width: 100%;
+}
+
+.cart_table_productsInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 2rem;
+  width: 55%;
+}
+
+.cart_table_productsInfo_name {
+  margin-bottom: 2rem;
+  font-size: 1.25rem;
+}
+
+.cart_table_productsInfo_remain p {
+  font-size: 0.8rem;
+  margin-bottom: 0.3rem;
+}
+
+.cart_table_productsInfo_count {
+  padding: 0.2rem 0 0 0;
+  font-size: 0.8rem;
+}
+
+.cart_table_productsInfo_count button {
+  border: none;
+  font-size: 1rem;
+  font-weight: 400;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50px;
+  background-color: #eeeeee;
+  color: black;
+  cursor: pointer;
+}
+
+/*  */
+
+/*  */
+
+@media screen and (min-width: 1200px) {
+  .cart_wrapper {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

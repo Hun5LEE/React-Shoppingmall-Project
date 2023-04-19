@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./components/header/Header";
 import CategoryList from "./components/homeComponents/category/CategoryList";
-import { Routes, Route, useNavigate, NavigateFunction } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import axios from "axios";
 import ProductsPage from "./pages/products";
 import DetailsPage from "./pages/details";
 import CartPage from "./pages/cart";
 
 function App(): JSX.Element {
-  const navigate: NavigateFunction = useNavigate();
   // const productsData: Data[] = data;
   const [categoryData, setCategoryData] = useState([]);
 
@@ -23,9 +22,9 @@ function App(): JSX.Element {
         });
         //category 데이터
         setCategoryData(data);
-      } catch (error) {
+      } catch (err) {
         alert("실패");
-        console.log(error);
+        console.log(err);
       }
     })();
     return () => {
@@ -41,7 +40,7 @@ function App(): JSX.Element {
           path="/"
           element={
             <>
-              <Header navigate={navigate} />
+              <Header />
               <img
                 className="main_bg"
                 src={process.env.PUBLIC_URL + "./Img/main_bg.avif"}
@@ -55,7 +54,7 @@ function App(): JSX.Element {
           path="/categories/products/:categoryId"
           element={
             <>
-              <Header navigate={navigate} />
+              <Header />
               {/* <img
                 className="main_bg"
                 src={process.env.PUBLIC_URL + "./Img/main_bg.avif"}
@@ -69,7 +68,7 @@ function App(): JSX.Element {
           path="/categories/products/:categoryId/details/:productId"
           element={
             <>
-              <Header navigate={navigate} />
+              <Header />
               <DetailsPage />
             </>
           }
@@ -86,7 +85,7 @@ function App(): JSX.Element {
           path="/cart"
           element={
             <>
-              <Header navigate={navigate} />
+              <Header />
               <CartPage />
             </>
           }

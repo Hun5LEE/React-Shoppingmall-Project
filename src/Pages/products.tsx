@@ -51,8 +51,9 @@ function ProductsPage() {
           cancelToken: source.token,
         });
         setProductList(products);
-      } catch (error) {
+      } catch (err) {
         alert("실패");
+        console.log(err);
       }
     })();
     return () => {

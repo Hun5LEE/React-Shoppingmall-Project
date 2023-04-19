@@ -1,7 +1,5 @@
 import "./DetailsBtn.css";
 import { Product } from "../../pages/products";
-import { useDispatch } from "react-redux";
-import { addProduct } from "../../store/store";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -10,16 +8,21 @@ interface DetailsBtnProps {
 }
 
 function DetailsBtn({ data: product }: DetailsBtnProps): JSX.Element {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  console.log(product);
+  //
+  const handleCart = async () => {
+    try {
+      await axios.post("http://localhost:4000/cart", { ...product });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="details_button">
       <button
         onClick={() => {
-          dispatch(addProduct(product));
+          handleCart();
           navigate("/cart");
         }}
       >
@@ -27,7 +30,7 @@ function DetailsBtn({ data: product }: DetailsBtnProps): JSX.Element {
       </button>
       <button
         onClick={() => {
-          dispatch(addProduct(product));
+          handleCart();
         }}
       >
         장바구니 추가
@@ -39,12 +42,3 @@ function DetailsBtn({ data: product }: DetailsBtnProps): JSX.Element {
 export default DetailsBtn;
 
 // server 이용한 카트추가
-// const handleCart = () => {
-// axios
-//   .post("http://localhost:4000/cart", {
-//     ...product,
-//   })
-//   .then((res) => {
-//     console.log(res);
-//   });
-// };

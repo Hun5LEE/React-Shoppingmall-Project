@@ -1,4 +1,3 @@
-import React from "react";
 import "./Header.css";
 import {
   faArrowRightToBracket,
@@ -8,16 +7,14 @@ import {
   faEye,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { NavigateFunction } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 
-interface HeaderProps {
-  navigate: NavigateFunction;
-}
-
-function Header({ navigate }: HeaderProps): JSX.Element {
-  const state = useSelector((state: RootState) => state.cart);
+function Header(): JSX.Element {
+  const navigate = useNavigate();
+  // cart의 담은 갯수를 표시하기 위해 사용
+  const cartState = useSelector((state: RootState) => state.cart);
 
   return (
     <div className="header">
@@ -36,7 +33,8 @@ function Header({ navigate }: HeaderProps): JSX.Element {
           </div>
           <div onClick={() => navigate("/cart")}>
             <FontAwesomeIcon icon={faBagShopping} size="xl" />
-            <span> Shopping Bag({state.length}) </span>
+
+            <span> Shopping Bag({cartState.length}) </span>
           </div>
           <div onClick={() => navigate("/Login")}>
             <FontAwesomeIcon icon={faArrowRightToBracket} size="xl" />
