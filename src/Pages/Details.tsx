@@ -17,7 +17,8 @@ function DetailsPage(): JSX.Element {
         } = await axios.get(`http://localhost:4000/categories/${categoryId}`, {
           cancelToken: source.token,
         });
-        setProduct(products[Number(productId)]);
+        // 배열의 index는 0부터 시작하므로 -1을 해줌
+        setProduct(products[Number(productId) - 1]);
       } catch (err) {
         alert("실패");
         console.log(err);

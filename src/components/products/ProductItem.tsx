@@ -13,7 +13,7 @@ function ProductItem({ data: productItem }: ProductListProps) {
 
   return (
     <>
-      <Link to={`/categories/products/${categoryId}/details/${id - 1}`}>
+      <Link to={`/categories/products/${categoryId}/details/${id}`}>
         <div className="product_Item">
           <img src={imgUrl} alt="" width={280} height={280} />
           <h4>{title}</h4>

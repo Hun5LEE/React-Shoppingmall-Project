@@ -8,13 +8,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
 
 function Header(): JSX.Element {
   const navigate = useNavigate();
-  // cart의 담은 갯수를 표시하기 위해 사용
-  const cartState = useSelector((state: RootState) => state.cart);
 
   return (
     <div className="header">
@@ -33,8 +29,7 @@ function Header(): JSX.Element {
           </div>
           <div onClick={() => navigate("/cart")}>
             <FontAwesomeIcon icon={faBagShopping} size="xl" />
-
-            <span> Shopping Bag({cartState.length}) </span>
+            <span> Shopping Bag </span>
           </div>
           <div onClick={() => navigate("/Login")}>
             <FontAwesomeIcon icon={faArrowRightToBracket} size="xl" />

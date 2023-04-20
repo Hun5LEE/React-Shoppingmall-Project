@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./components/header/Header";
 import CategoryList from "./components/homeComponents/category/CategoryList";
@@ -7,13 +7,18 @@ import axios from "axios";
 import ProductsPage from "./pages/products";
 import DetailsPage from "./pages/details";
 import CartPage from "./pages/cart";
+import LoginPage from "./pages/login";
 
 function App(): JSX.Element {
   // const productsData: Data[] = data;
   const [categoryData, setCategoryData] = useState([]);
 
   // 첫페이지 mount할때 useEffect로 비동기처리 즉시 호출하여 데이터 받아오기. -> Destructuring 하여 변수에 할당
+
   useEffect(() => {
+    if (sessionStorage.getItem("watched") === null) {
+      sessionStorage.setItem("watched", JSON.stringify([]));
+    }
     const source = axios.CancelToken.source();
     (async () => {
       try {
@@ -46,6 +51,8 @@ function App(): JSX.Element {
                 src={process.env.PUBLIC_URL + "./Img/main_bg.avif"}
                 alt=""
               />
+              {/* <RecentlyWatched /> */}
+
               <CategoryList data={categoryData} />
             </>
           }
@@ -55,11 +62,6 @@ function App(): JSX.Element {
           element={
             <>
               <Header />
-              {/* <img
-                className="main_bg"
-                src={process.env.PUBLIC_URL + "./Img/main_bg.avif"}
-                alt=""
-              /> */}
               <ProductsPage />
             </>
           }
@@ -73,14 +75,14 @@ function App(): JSX.Element {
             </>
           }
         />
-        {/* {/* <Route
-          path="/Login"
+        <Route
+          path="/login"
           element={
             <>
-              <Login />
+              <LoginPage />
             </>
           }
-        /> */}
+        />
         <Route
           path="/cart"
           element={

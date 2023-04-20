@@ -1,4 +1,3 @@
-import React from "react";
 import "./CartOrder.css";
 
 function CartOrder({ price }: { price: number }): JSX.Element {

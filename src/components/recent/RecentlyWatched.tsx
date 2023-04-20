@@ -1,22 +1,16 @@
 import React from "react";
 import "./RecentlyWatched.css";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
-import { NavigateFunction } from "react-router-dom";
 import { Data } from "../../App";
+import { useNavigate } from "react-router-dom";
 
-function RecentlyWatched({
-  navigate,
-}: {
-  navigate: NavigateFunction;
-}): JSX.Element {
+function RecentlyWatched(): JSX.Element {
+  const navigate = useNavigate();
   const recentlyWatched = JSON.parse(
-    sessionStorage.getItem("cartItems") as string
+    sessionStorage.getItem("watched") as string
   );
-  const state = useSelector((state: RootState) => state.cart);
   return (
     <div className="recently_watched_wrapper">
-      <div className="recently_watched_cart">CART({state.length})</div>
+      <div className="recently_watched_cart">watched</div>
       <div className="recently_watched_products">
         <h4>최근본상품</h4>
         {recentlyWatched === null
@@ -29,13 +23,10 @@ function RecentlyWatched({
                   <div
                     key={i}
                     onClick={() =>
-                      navigate(`./products1/details/${recentlyWatched[i].id}`)
+                      navigate(`./categories/products/${recentlyWatched[i].id}`)
                     }
                   >
-                    <img
-                      src={process.env.PUBLIC_URL + `${recentlyWatched[i].img}`}
-                      alt=""
-                    />
+                    <img src={recentlyWatched[i].imgUrl} alt="" />
                   </div>
                 );
               })}

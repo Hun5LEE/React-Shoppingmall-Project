@@ -28,7 +28,6 @@ const cart = createSlice({
   name: "cart",
   initialState: [] as Cart[],
   reducers: {
-    // Cart에서 addCount 파라미터로 state[i].id를 전달한다
     // -> findIndex를 사용하여 state의 id와 전달받은 id가 일치하는것을 리턴 -> 리턴받은 인덱스로 count + 1해줌
     addCount(state, action) {
       const addIndex = state.findIndex((item) => {
@@ -51,21 +50,6 @@ const cart = createSlice({
     addProduct(state, action) {
       // 주문하기 눌렀을때 만약 배열에 해당 상품이 있다 -> 그러면 count만 + 1 없으면 push
       // 해당하는 상품의 인덱스를 담는다 없으면 -1
-      //   const existingProductIndex = state.findIndex((product) => {
-      //     return product.id === action.payload.id;
-      //   });
-      //   if (existingProductIndex === -1) {
-      //     state.push(action.payload);
-      //   } else {
-      //     // 주문하기 버튼 누를시 count + 1 이지만  stocks보다 초과못하게함.
-      //     state[existingProductIndex].count <
-      //       state[existingProductIndex].stocks &&
-      //       state[existingProductIndex].count++;
-      //     console.log(state[1]);
-      //   }
-      // },
-      // deleteProduct(state, action) {
-      //   state.splice(action.payload, 1);
       // splice메소드를 이용하여 기존 배열의 요소를 초기화 하고 push 해주기. (버그 방지)
       state.splice(0, state.length);
       state.push(...action.payload);
@@ -96,8 +80,8 @@ const cartCheckedList = createSlice({
     },
     deleteCheckList(state, action) {
       // id를 파라미터로 넘겨받고 id와 일치하는 해당인덱스를 찾아 해당 인덱스요소 삭제
-      const existingProductIndex = state.findIndex((product) => {
-        return product.id === action.payload;
+      const existingProductIndex = state.findIndex((item) => {
+        return item.id === action.payload;
       });
       state.splice(existingProductIndex, 1);
     },

@@ -1,4 +1,4 @@
-.cart_wrapper {
+.cart_table_wrapper {
   display: flex;
   flex-direction: column;
 }
@@ -91,14 +91,23 @@ td {
   color: black;
   cursor: pointer;
 }
+.cart_text {
+  width: 50%;
+  height: 50vh;
+  font-size: 1.5rem;
+}
 
 /*  */
 
 /*  */
 
 @media screen and (min-width: 1200px) {
-  .cart_wrapper {
+  .cart_table_wrapper {
     flex-direction: row;
     justify-content: space-between;
+  }
+  .cart_text {
+    width: 800px;
+    height: 50vh;
   }
 }

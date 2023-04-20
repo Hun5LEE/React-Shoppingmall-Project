@@ -9,17 +9,9 @@ const RecommendProducts = memo(() => {
   const [productsList, setProductsList] = useState([...data]);
   const navigate = useNavigate();
   // useEffect 대신 useMemo를 사용하여 실행시점을 앞당겨 배열을 합침.
-  // useMemo(() => {
-  //   fetch("/Products/ShoeProducts.json")
-  //     .then((data) => data.json())
-  //     .then((result) => {
-  //       const copy = [...productsList, ...result];
-  //       setProductsList(copy);
-  //     })
-  //     .catch(() => {
-  //       alert("실패");
-  //     });
-  // }, []);
+  useMemo(() => {
+    
+  }, []);
 
   return (
     <div className="recommendproducts">
